@@ -1,0 +1,39 @@
+first_set=set(input().split())
+second_set=set(input().split())
+lines=int(input())
+is_subset=False
+
+
+def add_func(set_num, numbers):
+    set_num=set_num.union(numbers)
+    return set_num
+
+
+def remove_func(set_num, numbers):
+    for num in numbers:
+        if num in set_num:
+            set_num.discard(num)
+    return set_num
+
+
+for line in range(lines):
+    entry=input().split()
+    command=entry.pop(0)
+    number_of_set=entry.pop(0)
+    if command=="Add":
+        if number_of_set=="First":
+            first_set=set(add_func(first_set,entry))
+        else:
+            second_set=set(add_func(second_set,entry))
+    elif command=="Remove":
+        if number_of_set=="First":
+            first_set=set(remove_func(first_set,entry))
+            print(first_set)
+        else:
+            second_set=set(remove_func(second_set,entry))
+    elif command=="Check":
+        if first_set<second_set:
+            is_subset=True
+        if second_set<first_set:
+            is_subset=True
+        print(is_subset)
